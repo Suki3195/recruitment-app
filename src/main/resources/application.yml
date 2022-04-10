@@ -1,0 +1,33 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /recruitment-app
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:user_management_db
+    username: suki
+    password: suki123
+    driverClassName: org.h2.Driver
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: demomail2326@gmail.com
+    password: kpulwufccjhpbvvl
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: true
+
+
+
+# properties for sending mail
+email.from: demomail2326@gmail.com
