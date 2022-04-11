@@ -22,11 +22,11 @@ public class UserManagement {
 
     private String userName;
 
-    private String userRole;
+    private String role;
 
     private String dmMailId;
 
-    private String customers;
+    private String clients;
 
     private String managerEmailId;
 

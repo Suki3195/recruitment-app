@@ -5,6 +5,8 @@ import com.recruitment.app.service.impl.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path="/user")
 public class UserRoleController {
@@ -22,13 +24,12 @@ public class UserRoleController {
 
     }
 
-    @PostMapping("/getUser")
-    public String getUser (){
+    @GetMapping("/getAllUsers")
+    public List<UserRequest> getAllUser (){
 
-        return "Add user!!";
+        return userService.getAllUser();
 
     }
-
 
 
 

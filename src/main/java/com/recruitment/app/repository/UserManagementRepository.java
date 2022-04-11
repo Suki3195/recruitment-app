@@ -13,5 +13,5 @@ public interface UserManagementRepository extends CrudRepository<UserManagement 
 
     List<UserManagement> findByEmailId (String emailId);
 
-    List<UserManagement> findByEmailIdAndUserRole (String emailId,String role);
+    UserManagement findByEmailIdAndRole (String emailId,String role);
 }

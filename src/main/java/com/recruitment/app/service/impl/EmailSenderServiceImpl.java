@@ -18,14 +18,14 @@ public class EmailSenderServiceImpl {
     @Value("${email.from}")
     private String emailFrom;
 
-    public void sendMail (String pw){
+    public void sendMail (String email,String pw){
 
         log.info("About to send Mail");
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailFrom);
-        message.setTo("sukirtisingh3195@gmail.com");
+        message.setTo(email);
         message.setSubject("Recruitment App Test Mail");
-        message.setText("Dear Receiver, Your Password is  :   {}  " +  pw  + " . Kindly reset Your Password");
+        message.setText("Dear Receiver, Your Password is  :   " +  pw  + " . Kindly reset Your Password");
 
         mailSender.send(message);
         log.info("Mail Sent Successfully");

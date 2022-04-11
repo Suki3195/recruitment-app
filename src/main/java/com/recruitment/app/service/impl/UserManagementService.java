@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -34,35 +35,36 @@ public class UserManagementService  implements IUserManagementService {
 
         String pw=generatorService.generatePassword();
         String result = null;
-        List<UserManagement> userinDb = userRepository.findByEmailIdAndUserRole(request.getEmailId(),request.getUserRole());
+        UserManagement userinDb = userRepository.findByEmailIdAndRole(request.getEmailId(),request.getRole());
         List<UserManagement> userinDbWithDiffRole = userRepository.findByEmailId(request.getEmailId());
 
-        if (( userinDb.isEmpty()) &&
+        log.info ("USER ALREADY IN DB " + userinDb);
+        log.info ("USER ALREADY IN DB " + userinDb);
+
+        if(userinDb!=null){
+            result="USER_ALREADY_EXISTS";
+        }
+
+        if (userinDb == null &&
                 (!userinDbWithDiffRole.isEmpty())) {
 
             log.info("User with different roles");
-            log.info("WITH SAME ROLE " + userinDb.toString());
-            log.info("WITH DIFFERENT ROLE" + userinDbWithDiffRole.toString());
+            log.info("WITH SAME ROLE " + userinDb);
+            log.info("WITH DIFFERENT ROLE" + userinDbWithDiffRole);
             for (UserManagement user : userinDbWithDiffRole){
+                log.info("UPDATING PASSWORD FOR EXISTING USERS");
                 user.setPassword(pw);
                 user.setIsFirstLogIn("Y");
                 userRepository.save(user);
             }
 
             addUserWithNewRole(request,pw);
-//            emailSenderService.sendMail(pw);
             result="USER_ADDED";
         }
 
-        else if ((userinDb == null || userinDb.isEmpty()) &&
-                (userinDbWithDiffRole == null || userinDbWithDiffRole.isEmpty()) ){
+        else if ((userinDb == null && userinDbWithDiffRole.isEmpty()) ){
             log.info("NEW USER TO BE ADDED");
             result= addUserWithNewRole(request,pw);
-        }
-
-
-        else{
-            result="USER_ALREADY_EXISTS";
         }
 
         return result;
@@ -70,12 +72,25 @@ public class UserManagementService  implements IUserManagementService {
 
 
 
+    public List<UserRequest> getAllUser () {
+
+        List<UserManagement> usersInDb = (List<UserManagement>) userRepository.findAll();
+        List<UserRequest> userResponses = new ArrayList<>();
+        for (UserManagement user : usersInDb){
+            UserRequest userResponse = userMapper.getUserResponseFromDb(user);
+            userResponses.add(userResponse);
+        }
+        return userResponses;
+
+    }
+
     private String addUserWithNewRole(UserRequest request,String pw){
         UserManagement user = userMapper.getUserManagementFromUSerRequest(request);
         user.setPassword(pw);
         user.setIsFirstLogIn("Y");
+        log.info("ADDING USER WITH NEW ROLE");
         userRepository.save(user);
-//        emailSenderService.sendMail(pw);
+        emailSenderService.sendMail(request.getEmailId(), pw);
         return "USER_ADDED";
     }
 }

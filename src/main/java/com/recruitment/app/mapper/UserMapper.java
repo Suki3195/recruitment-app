@@ -10,17 +10,29 @@ public class UserMapper {
     public UserManagement getUserManagementFromUSerRequest (UserRequest request) {
             return UserManagement.builder()
                     .emailId(request.getEmailId())
-                    .userRole(request.getUserRole())
+                    .role(request.getRole())
                     .userName(request.getName())
                     .managerEmailId(request.getManagerEmailId())
                     .region(request.getRegion())
-                    .dmMailId(request.getDmEmailId())
-                    .customers(request.getCustomer())
+                    .dmMailId(request.getDmMailId())
+                    .clients(request.getClients())
                     .build();
-
-
 
     }
 
+
+    public UserRequest getUserResponseFromDb (UserManagement  userFromDb){
+        return UserRequest.builder()
+                .name(userFromDb.getUserName())
+                .emailId(userFromDb.getEmailId())
+                .role(userFromDb.getRole())
+                .clients(userFromDb.getClients())
+                .dmMailId(userFromDb.getDmMailId())
+                .managerEmailId(userFromDb.getManagerEmailId())
+                .region(userFromDb.getRegion())
+                .build();
+
+
+    }
 
 }
