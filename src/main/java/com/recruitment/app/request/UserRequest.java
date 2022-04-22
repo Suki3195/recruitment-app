@@ -9,13 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 public class UserRequest {
 
-    private String name;
+    private String userName;
     private String emailId;
     private String role;
     private String dmMailId;
     private String region;
     private String clients;
     private String managerEmailId;
-
 
 }

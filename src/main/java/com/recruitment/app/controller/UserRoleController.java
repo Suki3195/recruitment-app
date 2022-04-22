@@ -31,7 +31,13 @@ public class UserRoleController {
 
     }
 
+    @DeleteMapping("/deleteUser")
+    public String deleteUserFromDb (@RequestParam String id){
 
+         userService.deleteUserFromDb(id);
+         return "DELETED_SUCCESSFULLY";
+
+    }
 
 
 }

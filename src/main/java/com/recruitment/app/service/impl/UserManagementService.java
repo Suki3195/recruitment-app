@@ -6,6 +6,7 @@ import com.recruitment.app.mapper.UserMapper;
 import com.recruitment.app.repository.UserManagementRepository;
 import com.recruitment.app.request.UserRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +85,12 @@ public class UserManagementService  implements IUserManagementService {
 
     }
 
+    public void deleteUserFromDb(String id){
+//        UserManagement user = userRepository.findByEmailIdAndRole(emailId,role);
+        userRepository.deleteById(Integer.valueOf(id));
+
+
+    }
     private String addUserWithNewRole(UserRequest request,String pw){
         UserManagement user = userMapper.getUserManagementFromUSerRequest(request);
         user.setPassword(pw);

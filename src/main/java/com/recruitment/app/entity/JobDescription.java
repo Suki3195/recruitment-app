@@ -1,9 +1,10 @@
 package com.recruitment.app.entity;
 
 import lombok.*;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 
 import javax.persistence.*;
+import java.sql.Blob;
+import java.util.List;
 
 @Entity
 @Table(name="JOB_DESCRIPTION")
@@ -12,14 +13,17 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobDescribtion {
+public class JobDescription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer userId;
+    private Integer jobId;
 
-    private String ocrId;
-    private String jdFile;
+    private Blob jdFile;
     private String jdShortName;
     private String description;
+    private String skill;
+    private String subSkills;
+
+
 }
