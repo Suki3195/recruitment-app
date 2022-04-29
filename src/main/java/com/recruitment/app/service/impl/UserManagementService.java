@@ -6,7 +6,6 @@ import com.recruitment.app.mapper.UserMapper;
 import com.recruitment.app.repository.UserManagementRepository;
 import com.recruitment.app.request.UserRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class UserManagementService  implements IUserManagementService {
 
         String pw=generatorService.generatePassword();
         String result = null;
-        UserManagement userinDb = userRepository.findByEmailIdAndRole(request.getEmailId(),request.getRole());
+        UserManagement userinDb = userRepository.findByEmailIdAndUserRole(request.getEmailId(),request.getRole());
         List<UserManagement> userinDbWithDiffRole = userRepository.findByEmailId(request.getEmailId());
 
         log.info ("USER ALREADY IN DB " + userinDb);
@@ -55,7 +54,7 @@ public class UserManagementService  implements IUserManagementService {
             for (UserManagement user : userinDbWithDiffRole){
                 log.info("UPDATING PASSWORD FOR EXISTING USERS");
                 user.setPassword(pw);
-                user.setIsFirstLogIn("Y");
+                user.setIsFirstLogin("Y");
                 userRepository.save(user);
             }
 
@@ -94,7 +93,7 @@ public class UserManagementService  implements IUserManagementService {
     private String addUserWithNewRole(UserRequest request,String pw){
         UserManagement user = userMapper.getUserManagementFromUSerRequest(request);
         user.setPassword(pw);
-        user.setIsFirstLogIn("Y");
+        user.setIsFirstLogin("Y");
         log.info("ADDING USER WITH NEW ROLE");
         userRepository.save(user);
         emailSenderService.sendMail(request.getEmailId(), pw);

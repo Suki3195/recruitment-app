@@ -16,10 +16,14 @@ public class Resume {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    // auto generated
     private Integer resumeId;
 
     private Blob resume;
+
     private String taAssignedId;
+
+    private String resumeStatus;
 
 
 }

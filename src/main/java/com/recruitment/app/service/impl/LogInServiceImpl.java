@@ -6,7 +6,6 @@ import com.recruitment.app.repository.UserManagementRepository;
 import com.recruitment.app.request.LoginRequest;
 import com.recruitment.app.request.ResetPasswordRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class LogInServiceImpl {
         if(!userList.isEmpty()){
             UserManagement user = userList.get(0);
             if (request.getPassword().equals(user.getPassword())) {
-                if (user.getIsFirstLogIn().equals("Y")) {
+                if (user.getIsFirstLogin().equals("Y")) {
                     loginStatus = "RESET_PASSWORD";
                 } else {
                     loginStatus = "LOGIN_SUCCESS";
@@ -49,7 +48,7 @@ public class LogInServiceImpl {
        List< UserManagement> useList = userRepository.findByEmailId(request.getEmailId());
        for (UserManagement user : useList){
            user.setPassword(request.getNewPassword());
-           user.setIsFirstLogIn("N");
+           user.setIsFirstLogin("N");
            userRepository.save(user);
        }
 

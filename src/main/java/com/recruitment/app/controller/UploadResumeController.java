@@ -1,9 +1,7 @@
 package com.recruitment.app.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.recruitment.app.request.ResumeRequest;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/resume")
@@ -11,7 +9,8 @@ public class UploadResumeController {
 
 
     @PostMapping("/uploadResume")
-    public String addUserRole (){
+    public String addResume(@RequestBody ResumeRequest resumeRequest){
+
 
         return "Upload Your Resume !!";
 
