@@ -4,6 +4,12 @@ server:
     context-path: /recruitment-app
 
 spring:
+  http:
+    multipart:
+      max-file-size: 1000000
+      max-request-size: 15MB
+
+
 #  h2:
 #    console:
 #      enabled: true

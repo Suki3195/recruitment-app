@@ -24,10 +24,10 @@ public class SkillController {
 
 
     @GetMapping("/getSubSkills")
-    public List<String> getSubSkills (@RequestParam String skill){
+    public List<String> getSubSkills (){
 
 
-        return service.getSubSkillsForGivenSkill(skill);
+        return service.getSubSkillsForGivenSkill();
 
     }
 

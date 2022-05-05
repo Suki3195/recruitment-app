@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Blob;
+import java.util.List;
 
 @Setter
 @Getter
@@ -14,10 +15,11 @@ import java.sql.Blob;
 public class JobRequest {
 
     private Blob jd;
+    private String ocrId;
     private String jdShortName;
     private String jdDescription;
     private String skill;
-    private String subSkill;
+    private List<String> subSkills;
 
 
 }

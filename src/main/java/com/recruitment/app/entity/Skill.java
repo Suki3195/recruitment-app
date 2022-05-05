@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Blob;
 
 @Entity
-@Table(name="SKILL")
+@Table(name="SKILLS")
 @Setter
 @Getter
 @Builder

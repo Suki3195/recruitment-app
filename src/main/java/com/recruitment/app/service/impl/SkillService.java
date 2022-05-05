@@ -35,9 +35,10 @@ public class SkillService {
     }
 
 
-    public List<String> getSubSkillsForGivenSkill( String skill){
-        List<SubSkill> subSkills = subSkillRepository.findBySkillName(skill);
-
+    public List<String> getSubSkillsForGivenSkill( ){
+        List<SubSkill> subSkills = (List<SubSkill>) subSkillRepository.findAll();
+//        System.out.println("SKILL ASKED IS   :- " + skill);
+        System.out.println("LIST FOR SUBSKILLS IS AS :-  " + subSkills.toString());
         List<String> subSkillNames = new ArrayList<>();
 
         for (SubSkill subSkill: subSkills) {

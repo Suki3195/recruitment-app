@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name="SUB_SKILL")
+@Table(name="SUB_SKILLS")
 @Setter
 @Getter
 @Builder
@@ -17,6 +17,7 @@ public class SubSkill {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer subSkillId;
+
 
     private String skillName;
 
