@@ -10,11 +10,13 @@ import lombok.*;
 public class UserRequest {
 
     private String userName;
+    private Integer userId;
     private String emailId;
     private String role;
     private String dmMailId;
     private String region;
     private String clients;
     private String managerEmailId;
+    private String telNo;
 
 }

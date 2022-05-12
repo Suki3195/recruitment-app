@@ -16,6 +16,7 @@ public class JobRequest {
 
     private Blob jd;
     private String ocrId;
+    private Integer jobId;
     private String jdShortName;
     private String jdDescription;
     private String skill;

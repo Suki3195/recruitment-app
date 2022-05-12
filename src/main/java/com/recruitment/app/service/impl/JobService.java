@@ -34,9 +34,17 @@ public class JobService {
 
     }
 
-    public List<JobResponse> getAllJobs (){
+    public List<JobResponse> getAllJobs () throws SQLException {
         List<JobResponse> jobResponseList = new ArrayList<>();
 
+        List<JobDescription> jobDescriptionList = (List<JobDescription>) jobRepository.findAll();
+
+
+        for (JobDescription jobFromDb : jobDescriptionList){
+
+            JobResponse jobResponse = mapper.createJobResponse(jobFromDb);
+            jobResponseList.add(jobResponse);
+        }
 
 
         return jobResponseList;

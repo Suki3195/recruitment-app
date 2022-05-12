@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -84,6 +85,13 @@ public class UserManagementService  implements IUserManagementService {
 
     }
 
+    public UserRequest getUserById(Integer id){
+
+        Optional<UserManagement> userFromDbOptional = userRepository.findById(id);
+        UserManagement userFromDb = userFromDbOptional.get();
+        return userMapper.getUserResponseFromDb(userFromDb);
+
+    }
     public void deleteUserFromDb(String id){
 //        UserManagement user = userRepository.findByEmailIdAndRole(emailId,role);
         userRepository.deleteById(Integer.valueOf(id));

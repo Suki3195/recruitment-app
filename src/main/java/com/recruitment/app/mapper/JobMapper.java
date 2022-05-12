@@ -2,7 +2,10 @@ package com.recruitment.app.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recruitment.app.entity.JobDescription;
+import com.recruitment.app.entity.Resume;
 import com.recruitment.app.request.JobRequest;
+import com.recruitment.app.response.JobResponse;
+import com.recruitment.app.response.ResumeResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +47,22 @@ public class JobMapper {
             subSkillsString.append(subSkill + " , ");
         }
         return subSkillsString.toString();
+    }
+
+
+
+    public JobResponse createJobResponse (JobDescription jobFromDB) throws SQLException {
+
+        Blob blob = new SerialBlob(jobFromDB.getJdFile());
+//        byte[] contents = blob.getBytes();
+
+        return JobResponse.builder()
+                .ocrId(jobFromDB.getOcrId())
+                .jd(blob)
+                .skill(jobFromDB.getSkill())
+
+                .build();
+
     }
 
 }

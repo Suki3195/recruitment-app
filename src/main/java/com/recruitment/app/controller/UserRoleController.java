@@ -31,6 +31,14 @@ public class UserRoleController {
 
     }
 
+
+    @GetMapping("/getUserById")
+    public UserRequest getAllUser (@RequestParam Integer id){
+
+        return userService.getUserById(id);
+
+    }
+
     @DeleteMapping("/deleteUser")
     public String deleteUserFromDb (@RequestParam String id){
 

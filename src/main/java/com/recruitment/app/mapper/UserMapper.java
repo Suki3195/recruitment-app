@@ -24,6 +24,7 @@ public class UserMapper {
     public UserRequest getUserResponseFromDb (UserManagement  userFromDb){
         return UserRequest.builder()
                 .userName(userFromDb.getUserName())
+                .userId(userFromDb.getUserId())
                 .emailId(userFromDb.getEmailId())
                 .role(userFromDb.getUserRole())
                 .clients(userFromDb.getClients())
