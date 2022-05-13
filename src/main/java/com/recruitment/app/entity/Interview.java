@@ -23,8 +23,8 @@ public class Interview {
     @ManyToOne
     private JobDescription jobDescription;
 
-    @OneToMany(mappedBy = "scheduledInterview")
-    private List<Resume> resumes;
+//    @OneToMany(mappedBy = "scheduledInterview")
+//    private List<Resume> resumes;
 
     private String assignedHM;
     private String assignedIP;

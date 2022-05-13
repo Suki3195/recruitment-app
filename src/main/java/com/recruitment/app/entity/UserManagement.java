@@ -37,4 +37,6 @@ public class UserManagement {
     private String password;
 
     private String isFirstLogin;
+
+    private String contactNumber;
 }

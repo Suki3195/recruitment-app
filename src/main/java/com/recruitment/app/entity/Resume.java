@@ -32,9 +32,9 @@ public class Resume {
 
     private LocalDateTime modifiedDateTime;
 
-    @ManyToOne
-    @JoinColumn(name="interview_id")
-    private Interview scheduledInterview;
+//    @ManyToOne
+//    @JoinColumn(name="interview_id")
+//    private Interview scheduledInterview;
 
 
 }

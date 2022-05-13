@@ -60,7 +60,9 @@ public class JobMapper {
                 .ocrId(jobFromDB.getOcrId())
                 .jd(blob)
                 .skill(jobFromDB.getSkill())
-
+                .jdDescription(jobFromDB.getDescription())
+                .jdShortName(jobFromDB.getJdShortName())
+                .subSkills(jobFromDB.getSubSkills())
                 .build();
 
     }

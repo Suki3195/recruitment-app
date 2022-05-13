@@ -1,6 +1,5 @@
 package com.recruitment.app.service.impl;
 
-
 import com.recruitment.app.entity.UserManagement;
 import com.recruitment.app.mapper.UserMapper;
 import com.recruitment.app.repository.UserManagementRepository;
@@ -36,21 +35,20 @@ public class UserManagementService  implements IUserManagementService {
 
         String pw=generatorService.generatePassword();
         String result = null;
-        UserManagement userinDb = userRepository.findByEmailIdAndUserRole(request.getEmailId(),request.getRole());
+        UserManagement userInDb = userRepository.findByEmailIdAndUserRole(request.getEmailId(),request.getRole());
         List<UserManagement> userinDbWithDiffRole = userRepository.findByEmailId(request.getEmailId());
 
-        log.info ("USER ALREADY IN DB " + userinDb);
-        log.info ("USER ALREADY IN DB " + userinDb);
+        log.info ("USER ALREADY IN DB " + userInDb);
 
-        if(userinDb!=null){
+        if(userInDb!=null){
             result="USER_ALREADY_EXISTS";
         }
 
-        if (userinDb == null &&
+        if (userInDb == null &&
                 (!userinDbWithDiffRole.isEmpty())) {
 
             log.info("User with different roles");
-            log.info("WITH SAME ROLE " + userinDb);
+            log.info("WITH SAME ROLE " + userInDb);
             log.info("WITH DIFFERENT ROLE" + userinDbWithDiffRole);
             for (UserManagement user : userinDbWithDiffRole){
                 log.info("UPDATING PASSWORD FOR EXISTING USERS");
@@ -63,15 +61,13 @@ public class UserManagementService  implements IUserManagementService {
             result="USER_ADDED";
         }
 
-        else if ((userinDb == null && userinDbWithDiffRole.isEmpty()) ){
+        else if ((userInDb == null && userinDbWithDiffRole.isEmpty()) ){
             log.info("NEW USER TO BE ADDED");
             result= addUserWithNewRole(request,pw);
         }
 
         return result;
     }
-
-
 
     public List<UserRequest> getAllUser () {
 
@@ -92,12 +88,29 @@ public class UserManagementService  implements IUserManagementService {
         return userMapper.getUserResponseFromDb(userFromDb);
 
     }
-    public void deleteUserFromDb(String id){
+
+    public void deleteUserFromDb(Integer id){
 //        UserManagement user = userRepository.findByEmailIdAndRole(emailId,role);
-        userRepository.deleteById(Integer.valueOf(id));
+        userRepository.deleteById(id);
 
 
     }
+
+    public void updateUser (Integer id , UserRequest request){
+        Optional<UserManagement> optionalUserFromDb = userRepository.findById(id);
+        UserManagement userFromDb = optionalUserFromDb.get();
+        userFromDb.setUserName(request.getUserName());
+        userFromDb.setUserRole(request.getRole());
+        userFromDb.setDmMailId(request.getDmMailId());
+        userFromDb.setManagerMailId(request.getManagerEmailId());
+        userFromDb.setRegion(request.getRegion());
+        userFromDb.setClients(request.getClients());
+        userFromDb.setContactNumber(request.getTelNo());
+
+        userRepository.save(userFromDb);
+
+    }
+
     private String addUserWithNewRole(UserRequest request,String pw){
         UserManagement user = userMapper.getUserManagementFromUSerRequest(request);
         user.setPassword(pw);

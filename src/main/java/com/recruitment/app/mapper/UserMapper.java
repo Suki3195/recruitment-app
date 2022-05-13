@@ -16,6 +16,7 @@ public class UserMapper {
                     .region(request.getRegion())
                     .dmMailId(request.getDmMailId())
                     .clients(request.getClients())
+                    .contactNumber(request.getTelNo())
                     .build();
 
     }
@@ -31,7 +32,7 @@ public class UserMapper {
                 .dmMailId(userFromDb.getDmMailId())
                 .managerEmailId(userFromDb.getManagerMailId())
                 .region(userFromDb.getRegion())
-//                .id(userFromDb.getUserId().toString())
+                .telNo(userFromDb.getContactNumber())
                 .build();
 
 
